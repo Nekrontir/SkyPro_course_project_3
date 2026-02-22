@@ -20,12 +20,15 @@ class HeadHunterAPIBase(ABC):
         """Получить вакансии конкретного работодателя."""
         pass
 
-    def _request(self, url: str, params: Dict[str, Any] = None) -> Optional[Dict[str, Any]]:
+    def _request(self, url: str, params: Optional[Dict[str, Any]] = None) -> Optional[Dict[str, Any]]:
         """Выполнить HTTP-запрос."""
         try:
             response = self.session.get(url, params=params, timeout=10)
             response.raise_for_status()
-            return response.json()
+            data = response.json()
+            if isinstance(data, dict):
+                return data
+            return None
         except requests.exceptions.RequestException as e:
             print(f"Ошибка сети: {e}")
             return None

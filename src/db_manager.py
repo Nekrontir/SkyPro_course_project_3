@@ -8,24 +8,24 @@ from src.config import DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT, DB_USER
 class DBManager:
     """Класс для управления данными в БД."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Инициализация параметров подключения."""
-        self.conn_params = {
-            "host": DB_HOST,
-            "port": DB_PORT,
-            "database": DB_NAME,
-            "user": DB_USER,
-            "password": DB_PASSWORD,
-        }
+        self.host = DB_HOST
+        self.port = DB_PORT
+        self.dbname = DB_NAME
+        self.user = DB_USER
+        self.password = DB_PASSWORD
 
     def _execute_query(self, query: str, params: tuple = ()) -> List[Tuple[Any, ...]]:
         """Выполнить SQL-запрос и вернуть результат."""
         conn = None
         try:
-            conn = psycopg2.connect(**self.conn_params)
+            conn = psycopg2.connect(
+                host=self.host, port=self.port, dbname=self.dbname, user=self.user, password=self.password
+            )
             with conn.cursor() as cur:
                 cur.execute(query, params)
-                result = cur.fetchall()
+                result = cur.fetchall()  # type: ignore
             return result
         except Exception as e:
             print(f"Ошибка выполнения запроса: {e}")

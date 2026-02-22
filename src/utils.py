@@ -3,7 +3,7 @@ from src.config import COMPANY_IDS
 from src.database import create_database, create_tables, insert_data
 
 
-def load_data_to_db():
+def load_data_to_db() -> None:
     """Загрузка данных с hh.ru и заполнение БД."""
     print("Начинаем загрузку данных с hh.ru...")
     hh_api = HeadHunterAPI()
@@ -28,7 +28,7 @@ def load_data_to_db():
     print("Загрузка завершена.")
 
 
-def print_vacancies(vacancies_list):
+def print_vacancies(vacancies_list: list) -> None:
     """Красивый вывод списка вакансий."""
     if not vacancies_list:
         print("Нет данных.")

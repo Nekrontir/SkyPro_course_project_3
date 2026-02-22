@@ -5,7 +5,7 @@ from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 from src.config import DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT, DB_USER
 
 
-def create_database():
+def create_database() -> None:
     """Создание базы данных, если она не существует."""
     conn = None
     try:
@@ -29,7 +29,7 @@ def create_database():
             conn.close()
 
 
-def create_tables():
+def create_tables() -> None:
     """Создание таблиц employers и vacancies."""
     conn = None
     try:
@@ -68,7 +68,7 @@ def create_tables():
             conn.close()
 
 
-def insert_data(employers_data: list, vacancies_data: dict):
+def insert_data(employers_data: list, vacancies_data: dict) -> None:
     """
     Заполнение таблиц данными.
     employers_data: список словарей с данными компаний (как от API hh.ru).
