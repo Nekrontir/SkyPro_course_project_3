@@ -80,7 +80,6 @@ def insert_data(employers_data: list, vacancies_data: dict) -> None:
         conn.autocommit = False
         cur = conn.cursor()
 
-        # Вставка работодателей
         for emp in employers_data:
             cur.execute(
                 """
@@ -94,7 +93,6 @@ def insert_data(employers_data: list, vacancies_data: dict) -> None:
                 (emp["id"], emp["name"], emp.get("alternate_url"), emp.get("open_vacancies", 0)),
             )
 
-        # Вставка вакансий
         for emp_id, vacancies in vacancies_data.items():
             for vac in vacancies:
                 salary = vac.get("salary")

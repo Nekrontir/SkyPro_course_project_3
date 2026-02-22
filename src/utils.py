@@ -8,7 +8,6 @@ def load_data_to_db() -> None:
     print("Начинаем загрузку данных с hh.ru...")
     hh_api = HeadHunterAPI()
 
-    # Используем COMPANY_IDS из конфига
     employers = hh_api.get_employers(COMPANY_IDS)
     if not employers:
         print("Не удалось получить данные о работодателях.")
