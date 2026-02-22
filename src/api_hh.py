@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import Any, Dict, List, Optional
+
 import requests
 
 
@@ -57,17 +58,13 @@ class HeadHunterAPI(HeadHunterAPIBase):
         page = 0
         per_page = 100
         while True:
-            params = {
-                'employer_id': employer_id,
-                'page': page,
-                'per_page': per_page
-            }
+            params = {"employer_id": employer_id, "page": page, "per_page": per_page}
             data = self._request(self.BASE_URL_VACANCIES, params)
-            if not data or 'items' not in data:
+            if not data or "items" not in data:
                 break
-            items = data['items']
+            items = data["items"]
             vacancies.extend(items)
-            if page >= data.get('pages', 0) - 1:
+            if page >= data.get("pages", 0) - 1:
                 break
             page += 1
         return vacancies
